@@ -17,16 +17,16 @@ import java.util.Set;
 
 public class ExecuterRead {
 
-    private final static HashMap<TypeFile, Parser> commandsMap = new HashMap<>();
+    private final static HashMap<TypeFile, Parser> strategyMap = new HashMap<>();
 
     static {
-        commandsMap.put(TypeFile.TXT, new Parser(new TextData()));
-        commandsMap.put(TypeFile.DOC, new Parser(new DocData()));
-        commandsMap.put(TypeFile.HTML, new Parser(new HtmlData()));
+        strategyMap.put(TypeFile.TXT, new Parser(new TextData()));
+        strategyMap.put(TypeFile.DOC, new Parser(new DocData()));
+        strategyMap.put(TypeFile.HTML, new Parser(new HtmlData()));
     }
 
     public static Set<String> read(File file) throws NotSuportedFile, InvalidFormatException, XmlException, IOException {
-       return commandsMap.get(TypeFile.getType(UtilsFile.getExtensionByStringHandling(file.getName()).get())).parse(file);
+       return strategyMap.get(TypeFile.getType(UtilsFile.getExtensionByStringHandling(file.getName()).get())).parse(file);
     }
 
 
