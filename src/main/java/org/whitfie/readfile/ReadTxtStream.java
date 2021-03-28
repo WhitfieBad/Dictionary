@@ -1,14 +1,12 @@
 package org.whitfie.readfile;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 
+public class ReadTxtStream implements ReadFileStream {
 
-public class GetTextFromTxt implements TextFromStreamFileType {
-    
     @Override
-    public String getText(InputStream inputStream) throws IOException {
+    public String readStream(InputStream inputStream) throws IOException {
         StringBuilder text = new StringBuilder();
         int i = -1;
         while ((i = inputStream.read()) != -1) {

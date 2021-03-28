@@ -1,7 +1,7 @@
 package org.whitfie.command;
 
-import java.io.IOException;
+import org.whitfie.model.Result;
 
 public interface Command {
-    boolean execute() throws IOException;
+    Result execute(Result result);
 }
