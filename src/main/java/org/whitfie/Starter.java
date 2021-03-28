@@ -14,7 +14,7 @@ public class Starter {
         CommandType commandType = null;
         Result result = null;
 
-        while (true) {
+        do {
             ConsoleHelper.printCommands();
 
             try {
@@ -24,7 +24,7 @@ public class Starter {
             }
 
             result = Executer.execute(commandType, result);
-        }
+        } while (true);
     }
 
 }
