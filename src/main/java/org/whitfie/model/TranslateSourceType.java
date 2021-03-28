@@ -3,7 +3,8 @@ package org.whitfie.model;
 import org.whitfie.exeptions.NotFoundType;
 
 public enum TranslateSourceType {
-    WOOORDHUNT;
+    WOOORDHUNT,
+    NULL;
 
     public static TranslateSourceType getValueOf(int i) throws NotFoundType {
         switch (i) {

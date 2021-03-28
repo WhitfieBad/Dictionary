@@ -20,7 +20,7 @@ public class TranslateWords implements Command {
             return result;
         }
 
-        TranslateSourceType type = null;
+        TranslateSourceType type = TranslateSourceType.NULL;
         Scanner scanner = new Scanner(System.in);
         WordsResult wordsResult = (WordsResult) result;
         TreeSet<TranslatedWord> translatedWords = new TreeSet<>();

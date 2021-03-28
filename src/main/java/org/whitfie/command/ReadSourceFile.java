@@ -33,7 +33,6 @@ public class ReadSourceFile implements Command {
             return result;
         }
 
-
         try {
             wordsResult.setWordsSet(StrategyReadFile.getWordsFromFile(file));
         } catch (NotFoundType notFoundType) {
