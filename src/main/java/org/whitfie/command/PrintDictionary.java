@@ -1,18 +1,13 @@
 package org.whitfie.command;
 
-import org.whitfie.model.Result;
-import org.whitfie.model.TranslatedWordsResult;
+import org.whitfie.model.Parameter;
+import org.whitfie.model.TranslatedWordsParameter;
 
 public class PrintDictionary implements Command {
 
     @Override
-    public Result execute(Result result) {
-        if (!(result instanceof TranslatedWordsResult)) {
-            System.out.println("First you need to translate the words that would bring the translation to the screen");
-            return result;
-        }
-
-        TranslatedWordsResult translateWords = (TranslatedWordsResult) result;
+    public Parameter execute(Parameter result) {
+        TranslatedWordsParameter translateWords = (TranslatedWordsParameter) result;
         translateWords.getTranslateWords().forEach(System.out::println);
 
         return result;

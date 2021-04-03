@@ -1,11 +1,11 @@
 package org.whitfie.command;
 
-import org.whitfie.model.Result;
+import org.whitfie.model.Parameter;
 
 public class NotSelectedCommand implements Command {
 
     @Override
-    public Result execute(Result result) {
+    public Parameter execute(Parameter result) {
         System.out.println("Not Selected");
         return result;
     }

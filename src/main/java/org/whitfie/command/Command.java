@@ -1,7 +1,7 @@
 package org.whitfie.command;
 
-import org.whitfie.model.Result;
+import org.whitfie.model.Parameter;
 
 public interface Command {
-    Result execute(Result result);
+    Parameter execute(Parameter result);
 }

@@ -3,14 +3,14 @@ package org.whitfie.model;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WordsResult implements Result {
+public class WordsParameter implements Parameter {
     private Set<String> wordsSet;
 
-    public WordsResult() {
+    public WordsParameter() {
         this.wordsSet = new HashSet<>();
     }
 
-    public WordsResult(Set<String> wordsSet) {
+    public WordsParameter(Set<String> wordsSet) {
         this.wordsSet = wordsSet;
     }
 

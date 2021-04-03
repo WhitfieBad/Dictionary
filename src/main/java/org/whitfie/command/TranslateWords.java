@@ -1,9 +1,10 @@
 package org.whitfie.command;
 
 import org.whitfie.exeptions.NotFoundType;
+import org.whitfie.exeptions.NullParametersExeption;
 import org.whitfie.model.*;
 import org.whitfie.resultfacory.FactoryTranslatedWordsResult;
-import org.whitfie.resultfacory.ResultFactory;
+import org.whitfie.resultfacory.ParametertFactory;
 import org.whitfie.translates.StrategyTranslates;
 import org.whitfie.utils.ConsoleHelper;
 
@@ -14,34 +15,32 @@ import java.util.TreeSet;
 public class TranslateWords implements Command {
 
     @Override
-    public Result execute(Result result) {
-        if (!(result instanceof WordsResult)) {
-            System.out.println("First you need to read file for translate");
-            return result;
-        }
-
+    public Parameter execute(Parameter result) {
         TranslateSourceType type = TranslateSourceType.NULL;
         Scanner scanner = new Scanner(System.in);
-        WordsResult wordsResult = (WordsResult) result;
+        WordsParameter wordsResult = (WordsParameter) result;
         TreeSet<TranslatedWord> translatedWords = new TreeSet<>();
-        ResultFactory resultFactory = new FactoryTranslatedWordsResult();
-        TranslatedWordsResult translatedWordsResult = (TranslatedWordsResult) resultFactory.create();
+        ParametertFactory resultFactory = new FactoryTranslatedWordsResult();
+        TranslatedWordsParameter translatedWordsResult = (TranslatedWordsParameter) resultFactory.create();
 
         ConsoleHelper.printTranslateSource();
 
-        try {
-             type = TranslateSourceType.getValueOf(scanner.nextInt());
-        } catch (NotFoundType notFoundType) {
-            System.out.println("source type dont exist");
-            return result;
+        type = TranslateSourceType.getValueOf(scanner.nextInt());
+
+        if (type == TranslateSourceType.NULL) {
+            System.out.println("Not found translate source");
         }
 
+        System.out.println("translating");
         try {
-            System.out.println("translating");
             translatedWords.addAll(StrategyTranslates.translateWords(wordsResult.getWordsSet(), type));
         } catch (IOException e) {
             System.out.println("Error translate -> " + e.getMessage());
             return result;
+        } catch (NullParametersExeption nullParametersExeption) {
+            nullParametersExeption.printStackTrace();
+        } catch (NotFoundType notFoundType) {
+            notFoundType.printStackTrace();
         }
 
         translatedWordsResult.setTranslateWords(translatedWords);

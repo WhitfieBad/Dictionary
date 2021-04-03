@@ -2,6 +2,7 @@ package org.whitfie.readfile;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.whitfie.exeptions.NotFoundType;
+import org.whitfie.exeptions.NullParametersExeption;
 import org.whitfie.model.FileType;
 
 import java.io.File;
@@ -17,8 +18,18 @@ public class StrategyReadFile {
         strategyHashMap.put(FileType.DOCS, new ReadDocxStream());
     }
 
-    public static Set<String> getWordsFromFile(File file) throws NotFoundType, IOException, InvalidFormatException {
-        return new ReadFile(strategyHashMap.get(FileType.valueOfFromExtension(file))).parseFile(file);
+    public static Set<String> getWordsFromFile(File file) throws NotFoundType, IOException, InvalidFormatException, NullParametersExeption {
+        if (file == null) {
+            throw new NullParametersExeption();
+        }
+
+        ReadFileStream readFileStream = strategyHashMap.get(FileType.valueOfFromExtension(file));
+
+        if (readFileStream == null) {
+            throw new NotFoundType();
+        }
+
+        return new ReadFile(readFileStream).parseFile(file);
     }
 
 }

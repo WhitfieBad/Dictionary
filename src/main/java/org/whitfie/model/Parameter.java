@@ -1,4 +1,4 @@
 package org.whitfie.model;
 
-public interface Result {
+public interface Parameter {
 }

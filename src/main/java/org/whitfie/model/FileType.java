@@ -6,6 +6,7 @@ import org.whitfie.utils.FileUtils;
 import java.io.File;
 
 public enum FileType {
+    NULL,
     TXT,
     DOCS,
     JSON;
@@ -17,7 +18,7 @@ public enum FileType {
             case "docs" : return DOCS;
             case "json" : return JSON;
         }
-        throw new NotFoundType(extension);
+        return NULL;
     }
 
 }

@@ -1,8 +1,9 @@
 package org.whitfie.command;
 
 import org.whitfie.exeptions.NotFoundType;
-import org.whitfie.model.Result;
-import org.whitfie.model.TranslatedWordsResult;
+import org.whitfie.exeptions.NullParametersExeption;
+import org.whitfie.model.Parameter;
+import org.whitfie.model.TranslatedWordsParameter;
 import org.whitfie.savefile.StrategySaveFile;
 import org.whitfie.utils.ConsoleHelper;
 
@@ -13,14 +14,9 @@ import java.util.Scanner;
 public class SaveDictionary implements Command {
 
     @Override
-    public Result execute(Result result) {
-        if (!(result instanceof TranslatedWordsResult)) {
-            System.out.println("First you need to translate for save words");
-            return result;
-        }
-
+    public Parameter execute(Parameter result) {
         Scanner scanner = new Scanner(System.in);
-        TranslatedWordsResult translateWords = (TranslatedWordsResult) result;
+        TranslatedWordsParameter translateWords = (TranslatedWordsParameter) result;
 
         System.out.println("Input file path for save file");
 
@@ -39,6 +35,8 @@ public class SaveDictionary implements Command {
             System.out.println("this type format not exist");
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullParametersExeption nullParametersExeption) {
+            nullParametersExeption.printStackTrace();
         }
 
         return result;

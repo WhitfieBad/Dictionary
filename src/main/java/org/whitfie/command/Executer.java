@@ -1,20 +1,16 @@
 package org.whitfie.command;
 
-
-
 import org.whitfie.exeptions.NotFoundType;
+import org.whitfie.exeptions.NullParametersExeption;
 import org.whitfie.model.CommandType;
-import org.whitfie.model.Result;
+import org.whitfie.model.Parameter;
 
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.Set;
 
 public class Executer {
     private static HashMap<CommandType, Command> commandHashMap = new HashMap<>();
 
     static {
-        commandHashMap.put(CommandType.EXIT, new Exit());
         commandHashMap.put(CommandType.NOTSELECTED, new NotSelectedCommand());
         commandHashMap.put(CommandType.PRINTDICTIONARY, new PrintDictionary());
         commandHashMap.put(CommandType.READSOURCEFILE, new ReadSourceFile());
@@ -22,9 +18,18 @@ public class Executer {
         commandHashMap.put(CommandType.TRANSLATEWORDS, new TranslateWords());
     }
 
-    public static Result execute(CommandType commandType, Result result) {
+    public static Parameter execute(CommandType commandType, Parameter parameter) throws NotFoundType, NullParametersExeption {
+        if (commandType == null || parameter == null) {
+            throw new NullParametersExeption();
+        }
+
         Command command = commandHashMap.get(commandType);
-        return command.execute(result);
+
+        if (command == null) {
+            throw new NotFoundType(commandType.name());
+        }
+
+        return command.execute(parameter);
     }
 
 }

@@ -2,6 +2,7 @@ package org.whitfie.savefile;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.whitfie.exeptions.NotFoundType;
+import org.whitfie.exeptions.NullParametersExeption;
 import org.whitfie.model.FileType;
 import org.whitfie.model.TranslatedWord;
 import org.whitfie.readfile.ReadDocxStream;
@@ -23,8 +24,18 @@ public class StrategySaveFile {
         strategyHashMap.put(FileType.JSON, new GetJsonStreamFromWords());
     }
 
-    public static void saveWordsInFile(Set<TranslatedWord> translatedWords, File file) throws NotFoundType, IOException {
-        SaveFile saveFile = new SaveFile(strategyHashMap.get(FileType.valueOfFromExtension(file)));
+    public static void saveWordsInFile(Set<TranslatedWord> translatedWords, File file) throws NotFoundType, IOException, NullParametersExeption {
+        if (translatedWords == null || file == null) {
+            throw new NullParametersExeption();
+        }
+
+        GetFileStreamFromWords getFileStreamFromWords = strategyHashMap.get(FileType.valueOfFromExtension(file));
+
+        if (getFileStreamFromWords == null) {
+            throw new NotFoundType();
+        }
+
+        SaveFile saveFile = new SaveFile(getFileStreamFromWords);
         saveFile.saveWordsInFile(translatedWords, file);
     }
 }

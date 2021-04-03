@@ -2,14 +2,14 @@ package org.whitfie.model;
 
 import java.util.Set;
 
-public class TranslatedWordsResult implements Result {
+public class TranslatedWordsParameter implements Parameter {
 
     private Set<TranslatedWord> translateWords;
 
-    public TranslatedWordsResult() {
+    public TranslatedWordsParameter() {
     }
 
-    public TranslatedWordsResult(Set<TranslatedWord> translateWords) {
+    public TranslatedWordsParameter(Set<TranslatedWord> translateWords) {
         this.translateWords = translateWords;
     }
 

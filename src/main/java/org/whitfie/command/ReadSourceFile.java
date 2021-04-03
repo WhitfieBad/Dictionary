@@ -2,11 +2,12 @@ package org.whitfie.command;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.whitfie.exeptions.NotFoundType;
-import org.whitfie.model.Result;
-import org.whitfie.model.WordsResult;
+import org.whitfie.exeptions.NullParametersExeption;
+import org.whitfie.model.Parameter;
+import org.whitfie.model.WordsParameter;
 import org.whitfie.readfile.StrategyReadFile;
 import org.whitfie.resultfacory.FactoryWordsResult;
-import org.whitfie.resultfacory.ResultFactory;
+import org.whitfie.resultfacory.ParametertFactory;
 import org.whitfie.utils.ConsoleHelper;
 
 import java.io.File;
@@ -16,9 +17,9 @@ import java.util.Scanner;
 public class ReadSourceFile implements Command {
 
     @Override
-    public Result execute(Result result) {
-        ResultFactory resultFactory = new FactoryWordsResult();
-        WordsResult wordsResult = (WordsResult) resultFactory.create();
+    public Parameter execute(Parameter result) {
+        ParametertFactory resultFactory = new FactoryWordsResult();
+        WordsParameter wordsResult = (WordsParameter) resultFactory.create();
 
         Scanner scanner = new Scanner(System.in);
         File file = null;
@@ -41,6 +42,8 @@ public class ReadSourceFile implements Command {
             e.printStackTrace();
         } catch (InvalidFormatException e) {
             e.printStackTrace();
+        } catch (NullParametersExeption nullParametersExeption) {
+            nullParametersExeption.printStackTrace();
         }
 
         return wordsResult;

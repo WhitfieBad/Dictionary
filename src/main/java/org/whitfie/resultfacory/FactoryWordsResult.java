@@ -1,14 +1,12 @@
 package org.whitfie.resultfacory;
 
-import org.whitfie.model.Result;
-import org.whitfie.model.WordsResult;
+import org.whitfie.model.Parameter;
+import org.whitfie.model.WordsParameter;
 
-import java.util.Set;
-
-public class FactoryWordsResult implements ResultFactory {
+public class FactoryWordsResult implements ParametertFactory {
 
     @Override
-    public Result create() {
-        return new WordsResult();
+    public Parameter create() {
+        return new WordsParameter();
     }
 }
