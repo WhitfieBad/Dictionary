@@ -2,26 +2,22 @@ package org.whitfie.translates;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.whitfie.model.TranslatedWord;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.Map;
 
 public abstract class ParseTranslateStrategy {
 
-    private Document document;
+    String url = null;
 
-    public ParseTranslateStrategy() {
+    public ParseTranslateStrategy(String url) {
+        this.url = url;
     }
 
-    public Document getDocument() {
-        return document;
+    public Document getPageWord(String word) throws IOException {
+        return Jsoup.connect(url + word).get();
     }
 
-    public void parse(URL url) throws IOException {
-        this.document = Jsoup.parse(url, 3000);
-    }
-
-    public abstract Map<String, String> getTranslates() throws IOException;
+    public abstract TranslatedWord getWordTranslate(String word) throws IOException;
 
 }

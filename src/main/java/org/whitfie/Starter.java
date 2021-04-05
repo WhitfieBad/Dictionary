@@ -5,14 +5,19 @@ import org.whitfie.model.CommandType;
 import org.whitfie.model.NullParameter;
 import org.whitfie.model.TranslatedWordsParameter;
 import org.whitfie.model.WordsParameter;
+import org.whitfie.translates.ParseBabla;
+import org.whitfie.translates.ParseTranslateStrategy;
+import org.whitfie.translates.ParseWooordHunt;
 import org.whitfie.utils.ConsoleHelper;
+
+import java.io.IOException;
 
 public class Starter {
 
     private static WordsParameter words = null;
     private static TranslatedWordsParameter translatedWords = null;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         do {
             ConsoleHelper.printCommands();

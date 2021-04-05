@@ -14,6 +14,7 @@ public class StrategyTranslates {
 
     static {
         strategyHashMap.put(TranslateSourceType.WOOORDHUNT, new ParseWooordHunt());
+        strategyHashMap.put(TranslateSourceType.BABLA, new ParseBabla());
     }
 
     public static Set<TranslatedWord> translateWords(Set<String> wordsSet, TranslateSourceType translateSource) throws IOException, NotFoundType {
@@ -22,7 +23,6 @@ public class StrategyTranslates {
         if (parseTranslateStrategy == null) {
             throw new NotFoundType();
         }
-
         return new ParseTranslate(parseTranslateStrategy).translate(wordsSet);
     }
 

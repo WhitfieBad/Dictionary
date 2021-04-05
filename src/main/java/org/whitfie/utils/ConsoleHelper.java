@@ -16,6 +16,7 @@ public class ConsoleHelper {
 
     public static void printTranslateSource() {
         System.out.println("1 - WOORDHUNT");
+        System.out.println("2 - BABLA");
     }
 
     public static void printCommands() {

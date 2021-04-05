@@ -24,7 +24,7 @@ public class TranslatedWord implements Comparable<TranslatedWord> {
     }
 
     public String getTranslatedWord() {
-        return translatedWord;
+        return translatedWord.equals("") ? "not found translate" : translatedWord;
     }
 
     public void setTranslatedWord(String translatedWord) {
@@ -46,8 +46,7 @@ public class TranslatedWord implements Comparable<TranslatedWord> {
 
     @Override
     public String toString() {
-        String translate = translatedWord == null ? "not found translate" : translatedWord;
-        return word + " " + translate;
+        return word + " " + getTranslatedWord();
     }
 
     @Override
