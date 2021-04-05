@@ -13,7 +13,6 @@ public class Starter {
     private static TranslatedWordsParameter translatedWords = null;
 
     public static void main(String[] args) {
-        Command command = null;
 
         do {
             ConsoleHelper.printCommands();
@@ -22,8 +21,7 @@ public class Starter {
             if (commandType == CommandType.EXIT) {
                 break;
             } else {
-                command = Commands.getCommand(commandType);
-                execute(command);
+                execute(Commands.getCommand(commandType));
             }
         } while (true);
     }
