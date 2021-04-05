@@ -1,19 +1,21 @@
 package org.whitfie.model;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 public class TranslatedWordsParameter implements Parameter {
 
     private Set<TranslatedWord> translateWords;
 
     public TranslatedWordsParameter() {
+        translateWords = new TreeSet<>();
     }
 
     public TranslatedWordsParameter(Set<TranslatedWord> translateWords) {
         this.translateWords = translateWords;
     }
 
-    public Set<TranslatedWord> getTranslateWords() {
+    public Set<TranslatedWord> getTranslatedWords() {
         return translateWords;
     }
 

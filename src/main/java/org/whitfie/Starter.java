@@ -1,46 +1,46 @@
 package org.whitfie;
 
-import org.whitfie.command.Executer;
-import org.whitfie.exeptions.NotFoundType;
-import org.whitfie.exeptions.NullParametersExeption;
+import org.whitfie.command.*;
 import org.whitfie.model.CommandType;
-import org.whitfie.model.Parameter;
-import org.whitfie.resultfacory.FactoryNullParameter;
-import org.whitfie.resultfacory.ParametertFactory;
+import org.whitfie.model.NullParameter;
+import org.whitfie.model.TranslatedWordsParameter;
+import org.whitfie.model.WordsParameter;
 import org.whitfie.utils.ConsoleHelper;
 
-import java.util.Scanner;
-
 public class Starter {
+
+    private static WordsParameter words = null;
+    private static TranslatedWordsParameter translatedWords = null;
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        CommandType commandType = null;
-        ParametertFactory factory = new FactoryNullParameter();
-        Parameter parameter = factory.create();
+        Command command = null;
 
         do {
             ConsoleHelper.printCommands();
-
-            try {
-                commandType = CommandType.getCommandType(Integer.parseInt(scanner.nextLine()));
-            } catch (NumberFormatException exception) {
-                commandType = CommandType.NOTSELECTED;
-            }
+            CommandType commandType = CommandType.getCommandType(ConsoleHelper.getInt());
 
             if (commandType == CommandType.EXIT) {
-                System.exit(0);
-            }
-
-            try {
-                Executer.execute(commandType, parameter);
-            } catch (NotFoundType notFoundType) {
-                notFoundType.printStackTrace();
-            } catch (NullParametersExeption nullParametersExeption) {
-                nullParametersExeption.printStackTrace();
-            } catch (ClassCastException classCastException) {
-                System.out.println("not the correct order of the command");
+                break;
+            } else {
+                command = Commands.getCommand(commandType);
+                execute(command);
             }
         } while (true);
     }
 
+    private static void execute(Command command) {
+        if (command instanceof NotSelected) {
+            command.execute(new NullParameter());
+        } else if (command instanceof PrintDictionary && translatedWords != null) {
+            command.execute(translatedWords);
+        } else if (command instanceof SaveDictionary && translatedWords != null) {
+            command.execute(translatedWords);
+        } else if (command instanceof ReadSourceFile) {
+            words = (WordsParameter) command.execute(new NullParameter());
+        } else if (command instanceof TranslateWords && words != null) {
+            translatedWords = (TranslatedWordsParameter) command.execute(words);
+        } else {
+            System.out.println("incorrect command execution queue");
+        }
+    }
 }

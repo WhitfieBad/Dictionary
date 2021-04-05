@@ -14,10 +14,6 @@ public abstract class ParseTranslateStrategy {
     public ParseTranslateStrategy() {
     }
 
-    public ParseTranslateStrategy(URL url) throws IOException {
-        this.document = Jsoup.parse(url, 3000);
-    }
-
     public Document getDocument() {
         return document;
     }

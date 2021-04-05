@@ -1,7 +1,6 @@
 package org.whitfie.translates;
 
 import org.whitfie.exeptions.NotFoundType;
-import org.whitfie.exeptions.NullParametersExeption;
 import org.whitfie.model.TranslateSourceType;
 import org.whitfie.model.TranslatedWord;
 
@@ -17,11 +16,7 @@ public class StrategyTranslates {
         strategyHashMap.put(TranslateSourceType.WOOORDHUNT, new ParseWooordHunt());
     }
 
-    public static Set<TranslatedWord> translateWords(Set<String> wordsSet, TranslateSourceType translateSource) throws IOException, NullParametersExeption, NotFoundType {
-        if (wordsSet == null || translateSource == null) {
-            throw new NullParametersExeption();
-        }
-
+    public static Set<TranslatedWord> translateWords(Set<String> wordsSet, TranslateSourceType translateSource) throws IOException, NotFoundType {
         ParseTranslateStrategy parseTranslateStrategy = strategyHashMap.get(translateSource);
 
         if (parseTranslateStrategy == null) {

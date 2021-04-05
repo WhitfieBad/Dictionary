@@ -1,7 +1,6 @@
 package org.whitfie.command;
 
 import org.whitfie.exeptions.NotFoundType;
-import org.whitfie.exeptions.NullParametersExeption;
 import org.whitfie.model.Parameter;
 import org.whitfie.model.TranslatedWordsParameter;
 import org.whitfie.savefile.StrategySaveFile;
@@ -18,27 +17,26 @@ public class SaveDictionary implements Command {
         Scanner scanner = new Scanner(System.in);
         TranslatedWordsParameter translateWords = (TranslatedWordsParameter) result;
 
-        System.out.println("Input file path for save file");
-
         ConsoleHelper.printTypeForSave();
+        System.out.println("Input file path for save file");
         File file = new File(scanner.nextLine());
 
-        if (file.isDirectory()) {
-            System.out.println("this not file");
-            return result;
+        if (translateWords.getTranslatedWords().isEmpty()) {
+            System.out.println("Dictionary emty");
+            return null;
         }
 
-
-        try {
-            StrategySaveFile.saveWordsInFile(translateWords.getTranslateWords(), file);
-        } catch (NotFoundType notFoundType) {
-            System.out.println("this type format not exist");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NullParametersExeption nullParametersExeption) {
-            nullParametersExeption.printStackTrace();
+        if (file.canWrite() && file.isFile()) {
+            try {
+                StrategySaveFile.saveWordsInFile(translateWords.getTranslatedWords(), file);
+            } catch (NotFoundType notFoundType) {
+                System.out.println("this type format not exist");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("not cant write file or this not file");
         }
-
-        return result;
+        return null;
     }
 }

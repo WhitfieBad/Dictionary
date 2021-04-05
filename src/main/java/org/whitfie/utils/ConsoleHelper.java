@@ -1,6 +1,19 @@
 package org.whitfie.utils;
 
+import java.util.Scanner;
+
 public class ConsoleHelper {
+
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static int getInt() {
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) { }
+        return 0;
+    }
+
+
     public static void printTranslateSource() {
         System.out.println("1 - WOORDHUNT");
     }

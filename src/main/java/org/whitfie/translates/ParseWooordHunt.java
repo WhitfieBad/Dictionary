@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class ParseWooordHunt extends ParseTranslateStrategy {
 
-
     @Override
    public Map<String, String> getTranslates() throws IOException {
         parse(new URL("https://wooordhunt.ru/dic/content/en_ru"));

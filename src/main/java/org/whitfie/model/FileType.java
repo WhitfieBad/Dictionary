@@ -11,7 +11,7 @@ public enum FileType {
     DOCS,
     JSON;
 
-    public static FileType valueOfFromExtension(File file) throws NotFoundType {
+    public static FileType valueOfFromExtension(File file) {
         String extension = FileUtils.getExtensionByStringHandling(file.getName()).get();
         switch (extension.toLowerCase()) {
             case "txt" : return TXT;

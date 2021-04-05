@@ -8,8 +8,7 @@ public class PrintDictionary implements Command {
     @Override
     public Parameter execute(Parameter result) {
         TranslatedWordsParameter translateWords = (TranslatedWordsParameter) result;
-        translateWords.getTranslateWords().forEach(System.out::println);
-
-        return result;
+        translateWords.getTranslatedWords().forEach(System.out::println);
+        return null;
     }
 }
