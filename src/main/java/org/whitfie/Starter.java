@@ -10,6 +10,7 @@ import org.whitfie.translates.ParseTranslateStrategy;
 import org.whitfie.translates.ParseWooordHunt;
 import org.whitfie.utils.ConsoleHelper;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Starter {
@@ -18,7 +19,6 @@ public class Starter {
     private static TranslatedWordsParameter translatedWords = null;
 
     public static void main(String[] args) throws IOException {
-
         do {
             ConsoleHelper.printCommands();
             CommandType commandType = CommandType.getCommandType(ConsoleHelper.getInt());

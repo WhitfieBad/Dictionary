@@ -7,15 +7,15 @@ import java.util.Set;
 
 public class SaveFile {
 
-    private GetFileStreamFromWords getFileStreamFromWords;
+    private FormatFromWords formatFromWords;
 
-    public SaveFile(GetFileStreamFromWords getFileStreamFromWords) {
-        this.getFileStreamFromWords = getFileStreamFromWords;
+    public SaveFile(FormatFromWords formatFromWords) {
+        this.formatFromWords = formatFromWords;
     }
 
     public void saveWordsInFile(Set<TranslatedWord> translatedWords, File file) throws IOException {
         FileWriter fileWriter = new FileWriter(file);
-        fileWriter.write(new String(getFileStreamFromWords.getStreamFromWords(translatedWords).readAllBytes()));
+        fileWriter.write(formatFromWords.getStringFromWords(translatedWords));
         fileWriter.flush();
         fileWriter.close();
     }

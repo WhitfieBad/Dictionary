@@ -26,7 +26,7 @@ public class SaveDictionary implements Command {
             return null;
         }
 
-        if (file.canWrite() && file.isFile()) {
+        if (!file.isDirectory()){
             try {
                 StrategySaveFile.saveWordsInFile(translateWords.getTranslatedWords(), file);
             } catch (NotFoundType notFoundType) {

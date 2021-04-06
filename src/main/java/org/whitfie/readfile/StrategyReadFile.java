@@ -23,7 +23,6 @@ public class StrategyReadFile {
         if (readFileStream == null) {
             throw new NotFoundType();
         }
-
         return new ReadFile(readFileStream).parseFile(file);
     }
 

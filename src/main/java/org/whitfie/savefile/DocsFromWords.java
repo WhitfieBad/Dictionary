@@ -5,14 +5,12 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.whitfie.model.TranslatedWord;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Set;
 
-public class GetDocsStreamFromWords implements GetFileStreamFromWords {
+public class DocsFromWords implements FormatFromWords {
 
     @Override
-    public InputStream getStreamFromWords(Set<TranslatedWord> translatedWordSet) {
+    public String getStringFromWords(Set<TranslatedWord> translatedWordSet) {
         StringBuilder textWords = new StringBuilder();
 
         translatedWordSet.forEach(word -> textWords.append(word).append("\n"));
@@ -22,6 +20,6 @@ public class GetDocsStreamFromWords implements GetFileStreamFromWords {
         XWPFRun tmpRun = tmpParagraph.createRun();
         tmpRun.setText(textWords.toString());
 
-        return document.getDocument().newInputStream();
+        return document.getDocument().xmlText();
     }
 }
